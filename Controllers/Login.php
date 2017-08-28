@@ -7,9 +7,12 @@
 	$contrasena = $_POST['contrasena'];
 
 	if ($documento != null && $contrasena != null) {
-		echo "no son nulos";
 		$usuarioDAO = new UsuarioDAO();
 		$usuarioDAO->validarUsuario($documento, $contrasena);
+
+	}else{
+		header('location:../index.php');
+
 	}
 
 
