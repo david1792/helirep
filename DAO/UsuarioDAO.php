@@ -1,7 +1,5 @@
 <?php 
-	/**
-	* 
-	*/
+	
 	class UsuarioDAO{
 		
 		function validarUsuario($documento, $contrasena){
@@ -30,9 +28,40 @@
 				header('location:../index.php');
 				
 			}
+			
+		}
 
-		}	
+		function listarUsuarios(){
+			$con = conexion::getConexion();
+			$query = $con->query("SELECT * FROM usuario")->fetchAll(PDO::FETCH_OBJ);
+			
+			return $query;
+
+		}
+
+		function actualizarUsuario($id, $nombre, $apellido, $contrasena, $documento, $estado, $rol){
+			try {
+			$con = conexion::getConexion();
+			$query = $con->prepare("UPDATE usuario SET nombre = :nombre, apellido = :apellido, contrasena = :contrasena, documento = :documento, estado = :estado, rol = :rol where id = :id");
+			$query->bindParam(":id", $id, PDO::PARAM_INT);
+			$query->bindParam(":nombre", $nombre, PDO::PARAM_STR);
+			$query->bindParam(":apellido", $apellido, PDO::PARAM_STR);
+			$query->bindParam(":contrasena", $contrasena, PDO::PARAM_STR);
+			$query->bindParam(":documento", $documento, PDO::PARAM_STR);
+			$query->bindParam(":estado", $estado, PDO::PARAM_STR);
+			$query->bindParam(":rol", $rol, PDO::PARAM_STR);
+			$query->execute();
+
+			header("location:../listarUsuarios.php");
+			} catch (PDOException $e) {
+				echo($e);
+			}
+
+
+		}
+
+
 		
 	}
-
+	
  ?>
