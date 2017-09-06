@@ -1,6 +1,11 @@
 <?php 
 	session_start();
+	require('DAO/BodegaDAO.php');
+	require('util/Conexion.php');
+
 	if(isset($_SESSION['rol']) || $_SESSION['rol'] === 1){
+		$bodegaDAO = new BodegaDAO();
+		$listarBodegas = $bodegaDAO->listarbodegas();
 
  ?>
 
@@ -19,6 +24,44 @@
 	 	<a href="listarBodegas.php" class="button">Listar Bodegas</a>
 	 	<a href="listarProveedores.php" class="button">Listar proveedores</a>
 	 	<a href="listarCategorias.php" class="button">Listar categorias</a>
+	
+
+
+ 	<table border="1" style="margin: center">
+	 		<thead>
+	 			
+	 				<th>id</th>
+	 				<th>direccion</th>
+	 				<th>nombre</th>
+	 				<th>estado</th>
+	 				<th>usuario_id</th>
+	 				
+	 				
+	 			
+	 		</thead>
+	 		<br><br>
+	 		<tbody>
+	 			<?php foreach ($listarBodegas as $bodega): ?>
+	 				<tr>
+	 					<th><?php echo $bodega->id; ?></th>
+	 					<th><?php echo $bodega->direccion; ?></th>
+	 					<th><?php echo $bodega->nombre; ?></th>
+	 					<th><?php echo $bodega->estado; ?></th>
+	 					<th><?php echo $bodega->usuario_id; ?></th>
+	 					
+
+	 					<th><a href="editarBodega.php?idBodega=<?php echo $bodega->id ?>">opciones</a></th>
+	 				</tr>
+	 			<?php endforeach ?>
+
+	 		</tbody>
+	 	</table>
+
+
+
+
+
+
 	 </body>
  </html>
 

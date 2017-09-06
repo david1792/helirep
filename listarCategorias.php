@@ -1,6 +1,11 @@
 <?php 
 	session_start();
+	require('DAO/CategoriaDAO.php');
+	require('util/Conexion.php');
+
 	if(isset($_SESSION['rol']) || $_SESSION['rol'] === 1){
+		$categoriaDAO = new CategoriaDAO();
+		$listarCategorias = $categoriaDAO->listarCategorias();
 
  ?>
 
@@ -19,6 +24,41 @@
 	 	<a href="listarBodegas.php" class="button">Listar Bodegas</a>
 	 	<a href="listarProveedores.php" class="button">Listar proveedores</a>
 	 	<a href="listarCategorias.php" class="button">Listar categorias</a>
+	 
+
+
+ 	<table border="1" style="margin: center">
+	 		<thead>
+	 			
+	 				<th>id</th>
+	 				<th>descripcion</th>
+	 				
+	 				
+	 				
+	 				
+	 			
+	 		</thead>
+	 		<br><br>
+	 		<tbody>
+	 			<?php foreach ($listarCategorias as $categoria): ?>
+	 				<tr>
+	 					<th><?php echo $categoria->id; ?></th>
+	 					<th><?php echo $categoria->descripcion; ?></th>
+	 					
+	 					
+	 					
+
+	 					<th><a href="editarUsuario.php?idUsuario=<?php echo $usuarios->id ?>">opciones</a></th>
+	 				</tr>
+	 			<?php endforeach ?>
+
+	 		</tbody>
+	 	</table>
+
+
+
+
+
 	 </body>
  </html>
 
@@ -47,4 +87,4 @@
 <?php 
 		}
 
-?>
+?>	

@@ -28,7 +28,7 @@
 
 
 
-	 	<table style="margin: center">
+	 	<table border="1" style="margin: center">
 	 		<thead>
 	 			
 	 				<th>id</th>

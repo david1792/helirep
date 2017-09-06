@@ -1,6 +1,12 @@
+
 <?php 
 	session_start();
+	require('DAO/ProveedorDAO.php');
+	require('util/Conexion.php');
+
 	if(isset($_SESSION['rol']) || $_SESSION['rol'] === 1){
+		$proveedorDAO = new ProveedorDAO();
+		$listarProveedores = $proveedorDAO->listarProveedores();
 
  ?>
 
@@ -19,6 +25,39 @@
 	 	<a href="listarBodegas.php" class="button">Listar Bodegas</a>
 	 	<a href="listarProveedores.php" class="button">Listar proveedores</a>
 	 	<a href="listarCategorias.php" class="button">Listar categorias</a>
+	 
+
+
+ 	<table border="1" style="margin: center">
+	 		<thead>
+	 			
+	 				<th>id</th>
+	 				<th>nombre</th>
+	 				<th>estado</th>
+	 				
+	 				
+	 				
+	 			
+	 		</thead>
+	 		<br><br>
+	 		<tbody>
+	 			<?php foreach ($listarProveedores as $proveedor): ?>
+	 				<tr>
+	 					<th><?php echo $proveedor->id; ?></th>
+	 					<th><?php echo $proveedor->nombre; ?></th>
+	 					<th><?php echo $proveedor->estado; ?></th>
+	 					
+	 					
+
+	 					<th><a href="editarProveedor.php?idProveedor=<?php echo $proveedor->id ?>">opciones</a></th>
+	 				</tr>
+	 			<?php endforeach ?>
+
+	 		</tbody>
+	 	</table>
+
+
+
 	 </body>
  </html>
 

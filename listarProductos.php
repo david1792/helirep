@@ -1,6 +1,11 @@
 <?php 
 	session_start();
+	require('DAO/ProductoDAO.php');
+	require('util/Conexion.php');
+
 	if(isset($_SESSION['rol']) || $_SESSION['rol'] === 1){
+		$productoDAO = new ProductoDAO();
+		$listarProductos = $productoDAO->listarProductos();
 
  ?>
 
@@ -19,6 +24,46 @@
 	 	<a href="listarBodegas.php" class="button">Listar Bodegas</a>
 	 	<a href="listarProveedores.php" class="button">Listar proveedores</a>
 	 	<a href="listarCategorias.php" class="button">Listar categorias</a>
+	
+ 
+
+ 	<table border="1" style="margin: center">
+	 		<thead>
+	 			
+	 				<th>id</th>
+	 				<th>referencia</th>
+	 				<th>descripcion</th>
+	 				<th>proveedor</th>
+	 				<th>categoria</th>
+	 				<th>inventario</th>
+	 				
+	 			
+	 		</thead>
+	 		<br><br>
+	 		<tbody>
+	 			<?php foreach ($listarProductos as $producto): ?>
+	 				<tr>
+	 					<th><?php echo $producto->id; ?></th>
+	 					<th><?php echo $producto->referencia; ?></th>
+	 					<th><?php echo $producto->descripcion; ?></th>
+	 					<th><?php echo $producto->proveedor_id_proveedor; ?></th>
+	 					<th><?php echo $producto->categoria_id_categoria; ?></th>
+	 					<th><?php echo $producto->inventario_id; ?></th>
+	 					
+	 					<th><a href="editarProducto.php?idProducto=<?php echo $producto->id ?>">opciones</a></th>
+	 				</tr>
+	 			<?php endforeach ?>
+
+	 		</tbody>
+	 	</table>
+
+
+
+
+
+
+
+
 	 </body>
  </html>
 
