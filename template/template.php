@@ -23,7 +23,16 @@
     </head>
 
     <body>
+    
+        <h1>Bienvenido: <?php echo $_SESSION['nombre']. " ". $_SESSION['apellido']?></h1>
+        <a href="controllers/Logout.php">Cerrar Sesión</a><br><br><br>
 
+        <a href="listarUsuarios.php" class="button">Listar usuarios</a>
+        <a href="listarProductos.php" class="button">Listar productos</a>
+        <a href="listarBodegas.php" class="button">Listar Bodegas</a>
+        <a href="listarProveedores.php" class="button">Listar proveedores</a>
+        <a href="listarCategorias.php" class="button">Listar categorias</a>
+        <br><br><br>
     </body>
     <footer>
         <!-- Javascript -->

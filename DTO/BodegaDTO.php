@@ -9,9 +9,7 @@
 		private $nombre;		
 		private $estado;		
 		private $usuario_id;		
-				
 		
-
 		public function __construct($id, $direccion, $nombre, $estado, $usuario_id){
 			
 			$this->id = $id;
@@ -124,14 +122,11 @@
 	        return $this;
 	    }
 
-
-
 	    function __toString(){
 			echo "id: ". $this->getId(). " direccion: ". $this->getDireccion(). " nombre". $this->getNombre(). " estado: ". $this->getEstado(). " usuario_id: ". $this->getUsuario_id();
 
 		}	
 		
-
 	}
 
  ?>

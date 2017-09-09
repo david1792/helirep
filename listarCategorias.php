@@ -16,29 +16,15 @@
 	 	<title>Inicio jefe de taller</title>
 	 </head>
 	 <body>
-	 	<h1>Bienvenido: <?php echo $_SESSION['nombre']. " ". $_SESSION['apellido']?></h1>
-	 	<a href="controllers/Logout.php">Cerrar Sesión</a><br><br><br>
 
-	 	<a href="listarUsuarios.php" class="button">Listar usuarios</a>
-	 	<a href="listarProductos.php" class="button">Listar productos</a>
-	 	<a href="listarBodegas.php" class="button">Listar Bodegas</a>
-	 	<a href="listarProveedores.php" class="button">Listar proveedores</a>
-	 	<a href="listarCategorias.php" class="button">Listar categorias</a>
-	 
-
-
- 	<table border="1" style="margin: center">
+ 	<table  border="1" cellspacing="5" >
 	 		<thead>
 	 			
-	 				<th>id</th>
-	 				<th>descripcion</th>
-	 				
-	 				
-	 				
-	 				
-	 			
+	 			<th>id</th>
+	 			<th>descripcion</th>
+	 			<th>opciones</th>
+
 	 		</thead>
-	 		<br><br>
 	 		<tbody>
 	 			<?php foreach ($listarCategorias as $categoria): ?>
 	 				<tr>
@@ -48,7 +34,7 @@
 	 					
 	 					
 
-	 					<th><a href="editarUsuario.php?idUsuario=<?php echo $usuarios->id ?>">opciones</a></th>
+	 					<th><a href="editarUsuario.php?idUsuario=<?php echo $usuarios->id ?>">editar</a></th>
 	 				</tr>
 	 			<?php endforeach ?>
 

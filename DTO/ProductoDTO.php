@@ -6,7 +6,8 @@
 	{
 		private $id;
 		private $referencia;		
-		private $descripcion;		
+		private $descripcion;
+		private $isVerificado;		
 		private $proveedor;		
 		private $categoria;		
 		private $inventario;		
@@ -23,7 +24,7 @@
 			
 
 		}
-
+			
 	    /**
 	     * @return mixed
 	     */
@@ -80,6 +81,26 @@
 	    public function setDescripcion($descripcion)
 	    {
 	        $this->descripcion = $descripcion;
+
+	        return $this;
+	    }
+
+	    /**
+	     * @return mixed
+	     */
+	    public function getIsVerificado()
+	    {
+	        return $this->isVerificado;
+	    }
+
+	    /**
+	     * @param mixed $isVerificado
+	     *
+	     * @return self
+	     */
+	    public function setIsVerificado($isVerificado)
+	    {
+	        $this->isVerificado = $isVerificado;
 
 	        return $this;
 	    }
@@ -149,8 +170,7 @@
 			echo "id: ". $this->getId(). " referencia: ". $this->getReferencia(). " descripcion". $this->getDescripcion(). " proveedor: ". $this->getProveedor(). " categoria: ". $this->getCategoria(). " inventario: ". $this->getInventario();
 
 		}	
-		
 
-	}
+}
 
  ?>

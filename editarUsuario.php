@@ -39,7 +39,7 @@
  		<input id="estado" type="number" min="0" max="1" name="estado" value="<?php echo $filas[0]->estado ?>">
  		<br>
  		<label for="rol">rol</label>
- 		<input id="rol" type="number" min="0" max="3" name="rol" value="<?php echo $filas[0]->rol ?>">
+ 		<input id="rol" type="number" min="1" max="2" name="rol" value="<?php echo $filas[0]->rol ?>">
 
  		<button name="enviarActualizar">enviar</button>
  	</form>
