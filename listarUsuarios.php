@@ -48,7 +48,7 @@
 	 	</table>
 
 	 	<br>
-	 	<a class="button" href="">ingresar usuario</a>
+	 	<a class="button" href="crearUsuario.php">ingresar usuario</a>
 
 	 </body>
  </html>

@@ -60,6 +60,25 @@
 
 		}
 
+		function crearUsuario($nombre, $apellido, $contrasena, $documento, $estado, $rol){
+			try {
+			$con = conexion::getConexion();
+			$query = $con->prepare("INSERT INTO usuario VALUES (null, :nombre, :apellido,  :contrasena, :documento, :estado, :rol)");
+			$query->bindParam(":nombre", $nombre, PDO::PARAM_STR);
+			$query->bindParam(":apellido", $apellido, PDO::PARAM_STR);
+			$query->bindParam(":contrasena", $contrasena, PDO::PARAM_STR);
+			$query->bindParam(":documento", $documento, PDO::PARAM_STR);
+			$query->bindParam(":estado", $estado, PDO::PARAM_STR);
+			$query->bindParam(":rol", $rol, PDO::PARAM_STR);
+			$query->execute();
+
+			header("location:../listarUsuarios.php");
+			} catch (PDOException $e) {
+				echo($e);
+			}
+
+		}
+
 
 		
 	}

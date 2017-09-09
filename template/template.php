@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" class="no-js">
-
+    <?php  ?>
     <head>
 
         <meta charset="utf-8">
@@ -24,6 +24,11 @@
 
     <body>
     
+        <?php
+        if (isset($_SESSION['rol'])) {
+            
+         ?>
+
         <h1>Bienvenido: <?php echo $_SESSION['nombre']. " ". $_SESSION['apellido']?></h1>
         <a href="controllers/Logout.php">Cerrar Sesión</a><br><br><br>
 
@@ -43,5 +48,22 @@
         
     </footer>
 
+<?php
+   }else{
+
+
+   
+     ?>
+       <footer>
+        <!-- Javascript -->
+        <script src="assets/js/jquery-1.8.2.min.js"></script>
+        <script src="assets/js/supersized.3.2.7.min.js"></script>
+        <script src="assets/js/supersized-init.js"></script>
+        <script src="assets/js/scripts.js"></script>
+        
+    </footer>
+    <?php 
+}
+     ?>
 </html>
 

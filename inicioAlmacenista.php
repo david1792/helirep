@@ -11,8 +11,7 @@
 	 	<title>Inicio almacenista</title>
 	 </head>
 	 <body>
-	 	<h1>Bienvenido: <?php echo $_SESSION['nombre']. " ". $_SESSION['apellido']?></h1>
-	 	<a href="controllers/Logout.php">Cerrar Sesión</a>
+
 	 </body>
  </html>
 
