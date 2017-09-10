@@ -22,7 +22,7 @@
 
  	<form action="Controllers/ControladorUsuarios.php" method="post">
 		<br>
-		<input type="hidden" name="id" value="<?php echo $filas[0]->id ?>>
+		<input type="hidden" name="id" value="<?php echo $filas[0]->id ?>">
  		<label for="nombre">nombre</label>
  		<input id="nombre" type="text" name="nombre" value="<?php echo $filas[0]->nombre ?>">
 		<br>
