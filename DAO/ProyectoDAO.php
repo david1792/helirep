@@ -32,6 +32,24 @@
 
 		}
 
+		function crearProyecto($descripcion, $fechaInicio, $fechaFin, $usuario_id){
+			try {
+			$con = conexion::getConexion();
+			$query = $con->prepare("INSERT INTO proyecto VALUES (null, :descripcion, :fechaInicio,  :fechaFin, :usuario_id)");
+			$query->bindParam(":descripcion", $descripcion, PDO::PARAM_STR);
+			$query->bindParam(":fechaInicio", $fechaInicio, PDO::PARAM_STR);
+			$query->bindParam(":fechaFin", $fechaFin, PDO::PARAM_STR);
+			$query->bindParam(":usuario_id", $usuario_id, PDO::PARAM_STR);
+
+			$query->execute();
+
+			header("location:../listarProyectos.php");
+			} catch (PDOException $e) {
+				echo($e);
+			}
+
+		}
+
 	}
 	
  ?>

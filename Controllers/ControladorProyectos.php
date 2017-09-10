@@ -4,12 +4,14 @@ require('../DAO/ProyectoDAO.php');
 
 	$proyectoDAO = new ProyectoDAO();
 
-	if (isset($_POST['crearProveedor'])) {
+	if (isset($_POST['crearProyecto'])) {
 
 		$descripcion = $_POST['descripcion'];
 		$fechaInicio = $_POST['fecha_inicio'];
 		$fechaFin = $_POST['fecha_fin'];
-		$proyectoDAO->crearProyecto($nombre, $estado);
+		$usuario_id = $_POST['usuario_id'];
+
+		$proyectoDAO->crearProyecto($descripcion, $fechaInicio, $fechaFin, $usuario_id);
 		
 	}else{
 
