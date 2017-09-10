@@ -1,11 +1,12 @@
 <?php 
 	session_start();
-	require('DAO/ProyectoDAO.php');
+	require('DAO/SolicitudDAO.php');
 	require('util/Conexion.php');
 
 	if(isset($_SESSION['rol']) || $_SESSION['rol'] === 1){
-		$proyectoDAO = new ProyectoDAO();
-		$listaProyectos = $proyectoDAO->listarProyectos();
+		$solicitudDAO = new SolicitudDAO();
+		$id = $_GET['idProyecto'];
+		$filas = $solicitudDAO->listarSolicitudes($id);
 
  ?>
 
@@ -22,23 +23,17 @@
 	 			
 	 				<th>id</th>
 	 				<th>descripcion</th>
-	 				<th>fecha de inicio</th>
-	 				<th>fecha final</th>
-	 				<th>usuario que hizo el ingreso</th>
+	 				<th>fecha_solicitud</th>
 	 				<th>opciones</th>
 	 			
 	 		</thead>
 	 		<tbody>
-	 			<?php foreach ($listaProyectos as $fila): ?>
+	 			<?php foreach ($filas as $fila): ?>
 	 				<tr>
 	 					<th><?php echo $fila->id; ?></th>
 	 					<th><?php echo $fila->descripcion; ?></th>
-	 					<th><?php echo $fila->fecha_inicio; ?></th>
-	 					<th><?php echo $fila->fecha_fin; ?></th>
-	 					<th><?php echo $fila->usuario_id; ?></th>
-	 					<th><a href="editarProyecto.php?idProyecto=<?php echo $fila->id ?>">editar</a>
-	 					    <a href="nuevaSolicitud.php?idProyecto=<?php echo $fila->id?>">nueva solicitud</a> 
-	 					    <a href="listarSolicitudes.php?idProyecto=<?php echo $fila->id?>">listar solicitudes</a></th>
+	 					<th><?php echo $fila->fecha_solicitud; ?></th>
+	 					<th><a href="editarProyecto.php?idProyecto=<?php echo $fila->id ?>">nuevo movimiento</a></th>
 	 				</tr>
 	 			<?php endforeach ?>
 

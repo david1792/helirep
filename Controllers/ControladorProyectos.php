@@ -13,6 +13,12 @@ require('../DAO/ProyectoDAO.php');
 
 		$proyectoDAO->crearProyecto($descripcion, $fechaInicio, $fechaFin, $usuario_id);
 		
+	}if (isset($_POST['crearSolicitud'])) {
+		$descripcion = $_POST['descripcion'];
+		$fechaSolicitud = $_POST['fecha_solicitud'];
+		$proyecto_id = $_POST['proyecto_id'];
+		echo $descripcion. $fechaSolicitud. $proyecto_id;
+
 	}else{
 
 		$id = $_POST['id'];
