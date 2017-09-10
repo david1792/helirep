@@ -34,16 +34,16 @@
 	 					<th><?php echo $proveedor->nombre; ?></th>
 	 					<th><?php echo $proveedor->estado; ?></th>
 	 					
-	 					
-
 	 					<th><a href="editarProveedor.php?idProveedor=<?php echo $proveedor->id ?>">editar</a></th>
+
 	 				</tr>
 	 			<?php endforeach ?>
 
 	 		</tbody>
 	 	</table>
 
-
+	 	<br>
+	 	<a class="button" href="crearProveedor.php">ingresar proveedor</a>
 
 	 </body>
  </html>

@@ -29,8 +29,19 @@
 
 		}
 
+		function crearCategoria($descripcion){
+			try {
+			$con = conexion::getConexion();
+			$query = $con->prepare("INSERT INTO categoria VALUES (null, :descripcion)");
+			$query->bindParam(":descripcion", $descripcion, PDO::PARAM_STR);
 
-		
+			$query->execute();
+			header("location:../listarCategorias.php");
+			} catch (PDOException $e) {
+				echo($e);
+			}
+
+		}	
 	}
 	
  ?>

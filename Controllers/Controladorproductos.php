@@ -4,14 +4,27 @@
 
 	$productoDAO = new ProductoDAO();
 
-	$id = $_POST['id'];
-	$referencia = $_POST['referencia'];
-	$descripcion = $_POST['descripcion'];
-	$proveedor = $_POST['proveedor'];
-	$categoria = $_POST['categoria'];
-	$inventario = $_POST['inventario'];
-	
+	if (isset($_POST['crearProducto'])) {
 
-	$productoDAO->actualizarProducto($id, $referencia, $descripcion, $proveedor, $categoria, $inventario);
+		$referencia = $_POST['referencia'];
+		$descripcion = $_POST['descripcion'];
+		$estaVerificado = $_POST['estaVerificado'];
+		$proveedor = $_POST['proveedor'];
+		$categoria = $_POST['categoria'];
+		$inventario = $_POST['inventario'];
 
+		$productoDAO->crearProducto($referencia, $descripcion, $estaVerificado, $proveedor, $categoria, $inventario);
+
+	}else{
+
+		$id = $_POST['id'];
+		$referencia = $_POST['referencia'];
+		$descripcion = $_POST['descripcion'];
+		$proveedor = $_POST['proveedor'];
+		$categoria = $_POST['categoria'];
+		$inventario = $_POST['inventario'];
+		
+		$productoDAO->actualizarProducto($id, $referencia, $descripcion, $proveedor, $categoria, $inventario);
+
+	}	
  ?>

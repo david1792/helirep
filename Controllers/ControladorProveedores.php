@@ -4,12 +4,20 @@ require('../DAO/ProveedorDAO.php');
 
 	$proveedorDAO = new ProveedorDAO();
 
-	$id = $_POST['id'];
-	$nombre = $_POST['nombre'];
-	$estado = $_POST['estado'];
-	
-	
+	if (isset($_POST['crearProveedor'])) {
 
-	$proveedorDAO->actualizarProveedor($id, $nombre, $estado);
+		$nombre = $_POST['nombre'];
+		$estado = $_POST['estado'];
+		$proveedorDAO->crearProveedor($nombre, $estado);
+		
+	}else{
+
+		$id = $_POST['id'];
+		$nombre = $_POST['nombre'];
+		$estado = $_POST['estado'];
+		
+		$proveedorDAO->actualizarProveedor($id, $nombre, $estado);
+
+	}
 
  ?>

@@ -31,7 +31,23 @@
 
 		}
 
+		function crearBodega($direccion, $nombre, $estado, $usuario_id){
+			try {
+			$con = conexion::getConexion();
+			$query = $con->prepare("INSERT INTO bodega VALUES (null, :direccion, :nombre,  :estado, :usuario_id)");
+			$query->bindParam(":direccion", $direccion, PDO::PARAM_STR);
+			$query->bindParam(":nombre", $nombre, PDO::PARAM_STR);
+			$query->bindParam(":estado", $estado, PDO::PARAM_STR);
+			$query->bindParam(":usuario_id", $usuario_id, PDO::PARAM_STR);
 
+			$query->execute();
+
+			header("location:../listarBodegas.php");
+			} catch (PDOException $e) {
+				echo($e);
+			}
+
+		}
 		
 	}
 	

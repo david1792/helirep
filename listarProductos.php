@@ -48,12 +48,8 @@
 	 		</tbody>
 	 	</table>
 
-
-
-
-
-
-
+	 	<br>
+	 	<a class="button" href="crearProducto.php">ingresar producto</a>
 
 	 </body>
  </html>

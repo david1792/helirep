@@ -31,9 +31,6 @@
 	 					<th><?php echo $categoria->id; ?></th>
 	 					<th><?php echo $categoria->descripcion; ?></th>
 	 					
-	 					
-	 					
-
 	 					<th><a href="editarUsuario.php?idUsuario=<?php echo $usuarios->id ?>">editar</a></th>
 	 				</tr>
 	 			<?php endforeach ?>
@@ -41,9 +38,8 @@
 	 		</tbody>
 	 	</table>
 
-
-
-
+	 	<br>
+	 	<a class="button" href="crearCategoria.php">ingresar categoria</a>
 
 	 </body>
  </html>

@@ -37,7 +37,6 @@
 	 					<th><?php echo $bodega->estado; ?></th>
 	 					<th><?php echo $bodega->usuario_id; ?></th>
 	 					
-
 	 					<th><a href="editarBodega.php?idBodega=<?php echo $bodega->id ?>">editar</a></th>
 	 				</tr>
 	 			<?php endforeach ?>
@@ -45,10 +44,8 @@
 	 		</tbody>
 	 	</table>
 
-
-
-
-
+	 	<br>
+	 	<a class="button" href="crearBodega.php">ingresar bodega</a>
 
 	 </body>
  </html>
