@@ -1,12 +1,12 @@
 <?php 
 	session_start();
-	require('DAO/SolicitudDAO.php');
+	require('DAO/MovimientoSolicitudDAO.php');
 	require('util/Conexion.php');
 
 	if(isset($_SESSION['rol']) || $_SESSION['rol'] === 1){
-		$solicitudDAO = new SolicitudDAO();
-		$id = $_GET['idProyecto'];
-		$filas = $solicitudDAO->listarSolicitudes($id);
+		$movimientoSolicitudDAO = new MovimientoSolicitudDAO();
+		$id = $_GET['idSolicitud'];
+		$filas = $movimientoSolicitudDAO->listarMovimientos($id);
 
  ?>
 
@@ -22,18 +22,19 @@
 	 		<thead>
 	 			
 	 				<th>id</th>
+	 				<th>fecha_actualizacion</th>
+	 				<th>tipo_movimiento</th>
 	 				<th>descripcion</th>
-	 				<th>fecha_solicitud</th>
-	 				<th>opciones</th>
 	 			
 	 		</thead>
 	 		<tbody>
 	 			<?php foreach ($filas as $fila): ?>
 	 				<tr>
 	 					<th><?php echo $fila->id; ?></th>
+	 					<th><?php echo $fila->fecha_actualizacion; ?></th>
+	 					<th><?php echo $fila->tipo_movimiento; ?></th>
 	 					<th><?php echo $fila->descripcion; ?></th>
-	 					<th><?php echo $fila->fecha_solicitud; ?></th>
-	 					<th><a href="crearMovimiento.php?idSolicitud=<?php echo $fila->id ?>">nuevo movimiento</a> <a href="listarMovimientos.php?idSolicitud=<?php echo $fila->id ?>">listar movimiento</a></th>
+
 	 				</tr>
 	 			<?php endforeach ?>
 
