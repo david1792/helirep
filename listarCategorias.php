@@ -31,7 +31,7 @@
 	 					<th><?php echo $categoria->id; ?></th>
 	 					<th><?php echo $categoria->descripcion; ?></th>
 	 					
-	 					<th><a href="editarUsuario.php?idUsuario=<?php echo $usuarios->id ?>">editar</a></th>
+	 					<th><a href="editarCategoria.php?idCategoria=<?php echo $categoria->id ?>">editar</a></th>
 	 				</tr>
 	 			<?php endforeach ?>
 

@@ -21,14 +21,12 @@
  <body>
 
  	<form action="Controllers/ControladorCategorias.php" method="post">
+ 	
 		<br>
-		<input type="hidden" name="id" value="<?php echo $filas[0]->id ?>>
+		<input type="hidden" name="id" value="<?php echo $filas[0]->id ?>">
  		<label for="descripcion">descripcion</label>
  		<input id="descripcion"  type="text" name="descripcion" value="<?php echo $filas[0]->descripcion ?>">
 		<br>
- 		
- 		
- 		
  		
  		<button name="enviarActualizar">enviar</button>
  	</form>
