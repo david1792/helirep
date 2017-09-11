@@ -2,26 +2,24 @@
 	
 	class InventarioDAO{
 
-		function listarInventarios(){
+		function listarInventarios($id){
 			$con = conexion::getConexion();
-			$query = $con->query("SELECT * FROM inventario")->fetchAll(PDO::FETCH_OBJ);
-			
-			return $query;
+			$query = $con->prepare("SELECT * FROM inventario WHERE bodega_id = :id");
+			$query->bindParam(":id", $id, PDO::PARAM_INT);
+			$query->execute();
+			$filas = $query->fetchAll(PDO::FETCH_OBJ);
+			return $filas;
 
 		}
 
-		//implementar para inventario por favor
-		function actualizarInventario($id, $nombre, $estado){
+		function crearInventario($bodega){
 			try {
 			$con = conexion::getConexion();
-			$query = $con->prepare("UPDATE Proveedor SET nombre = :nombre, estado = :estado where id = :id");
-			$query->bindParam(":id", $id, PDO::PARAM_INT);
-			$query->bindParam(":nombre", $nombre, PDO::PARAM_STR);
-			$query->bindParam(":estado", $estado, PDO::PARAM_STR);
+			$query = $con->prepare("INSERT INTO inventario VALUES (null, 0, :bodega)");
+			$query->bindParam(":bodega", $bodega, PDO::PARAM_STR);
 
 			$query->execute();
-
-			header("location:../listarInventario.php");
+			header("location:../listarBodegas.php");
 			} catch (PDOException $e) {
 				echo($e);
 			}

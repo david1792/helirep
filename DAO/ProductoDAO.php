@@ -10,6 +10,16 @@
 
 		}
 
+		function listarProductosPorInventarios($id){
+			$con = conexion::getConexion();
+			$query = $con->prepare("SELECT * FROM producto WHERE inventario_id = :id");
+			$query->bindParam(":id", $id, PDO::PARAM_INT);
+			$query->execute();
+			$filas = $query->fetchAll(PDO::FETCH_OBJ);
+			return $filas;
+
+		}
+
 		function actualizarProducto($id, $referencia, $descripcion, $estaVerificado, $proveedor_id_proveedor, $categoria_id_categoria, $inventario_id){
 			try {
 			$con = conexion::getConexion();

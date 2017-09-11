@@ -37,7 +37,8 @@
 	 					<th><?php echo $bodega->estado; ?></th>
 	 					<th><?php echo $bodega->usuario_id; ?></th>
 	 					
-	 					<th><a href="editarBodega.php?idBodega=<?php echo $bodega->id ?>">editar</a></th>
+	 					<th><a href="editarBodega.php?idBodega=<?php echo $bodega->id ?>">editar</a> 
+	 						<a href="listarInventario.php?idBodega=<?php echo $bodega->id ?>">ver inventario</a></th>
 	 				</tr>
 	 			<?php endforeach ?>
 
