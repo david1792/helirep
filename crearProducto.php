@@ -11,7 +11,7 @@
 
 		$filasProveedor = $proveedorDAO->listarProveedores();
 		$filasCategorias = $categoriaDAO->listarCategorias();
-		$filasInventarios = $inventarioDAO->listarInventarios();
+		$filasInventarios = $inventarioDAO->listarTodosLosInventario();
 
 
  ?>

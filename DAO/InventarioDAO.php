@@ -2,6 +2,15 @@
 	
 	class InventarioDAO{
 
+		function listarTodosLosInventario(){
+			$con = conexion::getConexion();
+			$query = $con->prepare("SELECT * FROM inventario");
+			$query->execute();
+			$filas = $query->fetchAll(PDO::FETCH_OBJ);
+			return $filas;
+
+		}
+
 		function listarInventarios($id){
 			$con = conexion::getConexion();
 			$query = $con->prepare("SELECT * FROM inventario WHERE bodega_id = :id");
@@ -27,7 +36,27 @@
 
 		}
 
+		function contarProductosInventario($id){
+			try {
+			$con = conexion::getConexion();
+			$query = $con->query("SELECT count(*) AS contador FROM producto WHERE inventario_id = '$id'")->fetch();
 
+			$cantidad = $query['contador'];
+
+			echo($cantidad);
+			$query2 = $con->prepare("UPDATE inventario SET cantidad = :cantidad where id = :id");
+			print_r($query2);
+			$query2->bindParam(":cantidad", $cantidad, PDO::PARAM_STR);
+			$query2->bindParam(":id", $id, PDO::PARAM_STR);
+			$query2->execute();
+
+			return $query;
+			} catch (PDOException $e) {
+				echo($e);
+			}
+
+
+		}
 		
 	}
 	

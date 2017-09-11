@@ -1,5 +1,5 @@
 <?php 
-	
+	require('InventarioDAO.php');
 	class ProductoDAO{
 
 		function listarProductos(){
@@ -54,7 +54,8 @@
 			$query->bindParam(":inventario_id", $inventario_id, PDO::PARAM_STR);
 
 			$query->execute();
-
+			$inventarioDAO = new InventarioDAO();
+			$inventarioDAO->contarProductosInventario($inventario_id);
 			header("location:../listarProductos.php");
 			} catch (PDOException $e) {
 				echo($e);
