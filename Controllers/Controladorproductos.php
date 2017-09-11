@@ -20,11 +20,12 @@
 		$id = $_POST['id'];
 		$referencia = $_POST['referencia'];
 		$descripcion = $_POST['descripcion'];
+		$estaVerificado = $_POST['estaVerificado'];
 		$proveedor = $_POST['proveedor'];
 		$categoria = $_POST['categoria'];
 		$inventario = $_POST['inventario'];
 		
-		$productoDAO->actualizarProducto($id, $referencia, $descripcion, $proveedor, $categoria, $inventario);
+		$productoDAO->actualizarProducto($id, $referencia, $descripcion, $estaVerificado, $proveedor, $categoria, $inventario);
 
 	}	
  ?>
