@@ -24,7 +24,7 @@
 
 		function listarProductosPorBodega($id){
 			$con = conexion::getConexion();
-			$query = $con->prepare("SELECT * FROM producto INNER JOIN inventario ON inventario.id = producto.inventario_id WHERE inventario.bodega_id = :id");
+			$query = $con->prepare("SELECT * FROM producto INNER JOIN inventario ON inventario.id = producto.inventario_id WHERE inventario.bodega_id = :id AND producto.is_verificado = 1");
 			$query->bindParam(":id", $id, PDO::PARAM_INT);
 			$query->execute();
 			$filas = $query->fetchAll(PDO::FETCH_OBJ);

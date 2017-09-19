@@ -1,9 +1,13 @@
 <?php 
 	session_start();
 	if(isset($_SESSION['rol']) || $_SESSION['rol'] === 1){
+		require('DAO/ProductoDAO.PHP');
+		require('util/Conexion.php');
+
 		$proyecto_id = $_GET['idProyecto'];
-		$proyectoDAO = new ProyectoDAO();
-		$listaProyectos = $proyectoDAO->listarProductosPorBodega();
+		$bodega_id = $_GET['bodega_id'];
+		$ProductoDAO = new ProductoDAO();
+		$filas = $ProductoDAO->listarProductosPorBodega($bodega_id);
  ?>
 
  <!DOCTYPE html>
@@ -27,6 +31,13 @@
 	 	<input id="fecha_solicitud"  type="text" name="fecha_solicitud" value="" required="">
 		<br>
 
+ 		<label for="bodega">Bodega</label>
+	 	<select id="bodega" name="bodega" required="true">
+	 		<?php foreach ($filas as $fila): ?>
+	 			<option value="<?php echo $fila->id; ?>"><?php echo $fila->referencia; ?></option>
+	 		<?php endforeach ?>
+	 	</select>
+	 	<br>	
  		<button name="enviarActualizar">enviar</button>
 
  	</form>
