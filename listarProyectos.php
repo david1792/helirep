@@ -25,6 +25,7 @@
 	 				<th>fecha de inicio</th>
 	 				<th>fecha final</th>
 	 				<th>usuario que hizo el ingreso</th>
+	 				<th>bodega selecconada</th>
 	 				<th>opciones</th>
 	 			
 	 		</thead>
@@ -36,8 +37,9 @@
 	 					<th><?php echo $fila->fecha_inicio; ?></th>
 	 					<th><?php echo $fila->fecha_fin; ?></th>
 	 					<th><?php echo $fila->usuario_id; ?></th>
+	 					<th><?php echo $fila->bodega_id; ?></th>
 	 					<th><a href="editarProyecto.php?idProyecto=<?php echo $fila->id ?>">editar</a>
-	 					    <a href="nuevaSolicitud.php?idProyecto=<?php echo $fila->id?>">nueva solicitud</a> 
+	 					    <a href="nuevaSolicitud.php?idProyecto=<?php echo $fila->id?>&bodega_id=<?php echo $fila->bodega_id ?>">nueva solicitud</a> 
 	 					    <a href="listarSolicitudes.php?idProyecto=<?php echo $fila->id?>">listar solicitudes</a></th>
 	 				</tr>
 	 			<?php endforeach ?>
@@ -46,7 +48,7 @@
 	 	</table>
 
 	 	<br>
-	 	<a class="button" href="crearProyecto.php">ingresar usuario</a>
+	 	<a class="button" href="crearProyecto.php">ingresar proyecto</a>
 
 	 </body>
  </html>

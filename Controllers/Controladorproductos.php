@@ -14,8 +14,8 @@
 		$categoria = $_POST['categoria'];
 		$inventario = $_POST['inventario'];
 
-
 		$productoDAO->crearProducto($referencia, $descripcion, $estaVerificado, $proveedor, $categoria, $inventario);
+		
 	}else{
 
 		$id = $_POST['id'];

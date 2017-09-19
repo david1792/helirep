@@ -28,6 +28,7 @@
 		<br>
 
 		<input type="hidden" name="id" value="<?php echo $filas[0]->id ?>">
+		<input type="hidden" name="actualizarProyecto" value="">
 
  		<label for="descripcion">descripcion</label>
  		<input id="descripcion" type="text" name="descripcion" value="<?php echo $filas[0]->descripcion ?>">
@@ -45,13 +46,15 @@
  	<script type="text/javascript">
  		  $( function() {
 		    $("#fecha_inicio").datepicker({
-		     dateFormat: 'yy-mm-dd'
+		     dateFormat: 'yy-mm-dd',
+		     minDate: 0
 		      });
 		  });
 
  		  $( function() {
 		    $("#fecha_fin").datepicker({
-		     dateFormat: 'yy-mm-dd'
+		     dateFormat: 'yy-mm-dd',
+		     minDate: 0
 		      });
 		  });
 

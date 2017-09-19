@@ -34,6 +34,7 @@
 	 					<th><?php echo $fila->cantidad; ?></th>
 	 					<th><?php echo $fila->bodega_id; ?></th>
 	 					<th><a href="listarProductosInventario.php?inventarioId=<?php echo $fila->id ?>">ver productos inventario</a> 
+	 					<a href="listarMovimientosInventario.php?inventarioId=<?php echo $fila->id ?>">ver movimiento inventario</a></th>
 	 				</tr>
 	 			<?php endforeach ?>
 

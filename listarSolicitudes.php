@@ -17,7 +17,7 @@
 	 	<title>Inicio jefe de taller</title>
 	 </head>
 	 <body>
-
+	 	
 	 	<table border="1" cellspacing="5" >
 	 		<thead>
 	 			
@@ -41,7 +41,6 @@
 	 	</table>
 
 	 	<br>
-	 	<a class="button" href="crearProyecto.php">ingresar usuario</a>
 
 	 </body>
  </html>

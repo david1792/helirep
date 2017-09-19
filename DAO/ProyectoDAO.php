@@ -32,14 +32,15 @@
 
 		}
 
-		function crearProyecto($descripcion, $fechaInicio, $fechaFin, $usuario_id){
+		function crearProyecto($descripcion, $fechaInicio, $fechaFin, $usuario_id, $bodega_id){
 			try {
 			$con = conexion::getConexion();
-			$query = $con->prepare("INSERT INTO proyecto VALUES (null, :descripcion, :fechaInicio,  :fechaFin, :usuario_id)");
+			$query = $con->prepare("INSERT INTO proyecto VALUES (null, :descripcion, :fechaInicio,  :fechaFin, :usuario_id, :$bodega_id)");
 			$query->bindParam(":descripcion", $descripcion, PDO::PARAM_STR);
 			$query->bindParam(":fechaInicio", $fechaInicio, PDO::PARAM_STR);
 			$query->bindParam(":fechaFin", $fechaFin, PDO::PARAM_STR);
 			$query->bindParam(":usuario_id", $usuario_id, PDO::PARAM_STR);
+			$query->bindParam(":$bodega_id", $bodega_id, PDO::PARAM_STR);
 
 			$query->execute();
 

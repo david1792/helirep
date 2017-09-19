@@ -1,5 +1,7 @@
 <?php 
 	require('InventarioDAO.php');
+	require('MovimientoInventarioDAO.php');
+
 	class ProductoDAO{
 
 		function listarProductos(){
@@ -13,6 +15,16 @@
 		function listarProductosPorInventarios($id){
 			$con = conexion::getConexion();
 			$query = $con->prepare("SELECT * FROM producto WHERE inventario_id = :id");
+			$query->bindParam(":id", $id, PDO::PARAM_INT);
+			$query->execute();
+			$filas = $query->fetchAll(PDO::FETCH_OBJ);
+			return $filas;
+
+		}
+
+		function listarProductosPorBodega($id){
+			$con = conexion::getConexion();
+			$query = $con->prepare("SELECT * FROM producto INNER JOIN inventario ON inventario.id = producto.inventario_id WHERE inventario.bodega_id = :id");
 			$query->bindParam(":id", $id, PDO::PARAM_INT);
 			$query->execute();
 			$filas = $query->fetchAll(PDO::FETCH_OBJ);
@@ -56,6 +68,9 @@
 			$query->execute();
 			$inventarioDAO = new InventarioDAO();
 			$inventarioDAO->contarProductosInventario($inventario_id);
+			$movimientoInventarioDAO = new MovimientoInventarioDAO();
+			$movimientoInventarioDAO->crearMovimientoPrimeraVez($inventario_id);
+
 			header("location:../listarProductos.php");
 			} catch (PDOException $e) {
 				echo($e);

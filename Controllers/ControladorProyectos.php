@@ -13,8 +13,9 @@
 		$fechaInicio = $_POST['fecha_inicio'];
 		$fechaFin = $_POST['fecha_fin'];
 		$usuario_id = $_POST['usuario_id'];
+		$bodega_id = $_POST['bodega_id'];
 
-		$proyectoDAO->crearProyecto($descripcion, $fechaInicio, $fechaFin, $usuario_id);
+		$proyectoDAO->crearProyecto($descripcion, $fechaInicio, $fechaFin, $usuario_id, $bodega_id);
 		
 	}if (isset($_POST['crearSolicitud'])) {
 		$descripcion = $_POST['descripcion'];
@@ -31,7 +32,7 @@
 
 		$movimientoSolicitudDAO->crearMovimiento($fechaActualizacion, $tipoMovimiento, $descripcion, $solicitudId);
 
-	}else{
+	}if (isset($_POST['actualizarProyecto'])){
 
 		$id = $_POST['id'];
 		$descripcion = $_POST['descripcion'];
@@ -39,6 +40,9 @@
 		$fechaFin = $_POST['fecha_fin'];
 		$proyectoDAO->actualizarProyecto($id, $descripcion, $fechaInicio, $fechaFin);
 
+	}else{
+
+		echo "<h1>error, no existe esa opcion n00b saibot<h1/>";
 	}
 
  ?>

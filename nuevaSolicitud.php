@@ -2,7 +2,8 @@
 	session_start();
 	if(isset($_SESSION['rol']) || $_SESSION['rol'] === 1){
 		$proyecto_id = $_GET['idProyecto'];
-
+		$proyectoDAO = new ProyectoDAO();
+		$listaProyectos = $proyectoDAO->listarProductosPorBodega();
  ?>
 
  <!DOCTYPE html>
@@ -32,7 +33,9 @@
  	<script type="text/javascript">
  		  $( function() {
 		    $("#fecha_solicitud").datepicker({
-		     dateFormat: 'yy-mm-dd'
+		     dateFormat: 'yy-mm-dd',
+		     minDate: 0,
+		     maxDate: 'today',
 		      });
 		  });
 

@@ -1,12 +1,12 @@
 <?php 
 	session_start();
-	require('DAO/MovimientoSolicitudDAO.php');
+	require('DAO/MovimientoInventarioDAO.php');
 	require('util/Conexion.php');
 
 	if(isset($_SESSION['rol']) || $_SESSION['rol'] === 1){
-		$movimientoSolicitudDAO = new MovimientoSolicitudDAO();
-		$id = $_GET['idSolicitud'];
-		$filas = $movimientoSolicitudDAO->listarMovimientos($id);
+		$id = $_GET['inventarioId'];
+		$movimientoInventarioDAO = new MovimientoInventarioDAO();
+		$filas = $movimientoInventarioDAO->listarMovimientos($id);
 
  ?>
 
@@ -34,8 +34,6 @@
 	 					<th><?php echo $fila->fecha_actualizacion; ?></th>
 	 					<th><?php echo $fila->tipo_movimiento; ?></th>
 	 					<th><?php echo $fila->descripcion; ?></th>
-
-	 				</tr>
 	 			<?php endforeach ?>
 
 	 		</tbody>

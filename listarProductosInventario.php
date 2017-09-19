@@ -28,7 +28,6 @@
 	 				<th>proveedor</th>
 	 				<th>categoria</th>
 	 				<th>inventario</th>
-	 				<th>opciones</th>
 	 			
 	 		</thead>
 	 		<tbody>
@@ -41,9 +40,6 @@
 	 					<th><?php echo $fila->proveedor_id_proveedor; ?></th>
 	 					<th><?php echo $fila->categoria_id_categoria; ?></th>
 	 					<th><?php echo $fila->inventario_id; ?></th>
-	 					
-
-	 					<th><a href="listarProductosInventario.php?idSolicitud=<?php echo $fila->id ?>">ver productos inventario</a> 
 	 				</tr>
 	 			<?php endforeach ?>
 

@@ -39,7 +39,10 @@
  	<script type="text/javascript">
  		  $( function() {
 		    $("#fecha_actualizacion").datepicker({
-		     dateFormat: 'yy-mm-dd'
+		     dateFormat: 'yy-mm-dd',
+		     minDate: 0,
+		     maxDate: 'today',
+
 		      });
 		  });
 
