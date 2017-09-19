@@ -35,7 +35,9 @@
 	 		<label for="descripcion">descripcion</label>
 	 		<input id="descripcion"  type="text" name="descripcion" value="">
 			<br>
-
+	 		<label for="cantidad">cantidad</label>
+	 		<input id="cantidad"  type="number" name="cantidad" value="">
+	 		 <br>
 	 		<label for="estaVerificado">esta verificado?</label>
 	 		<select id="estaVerificado" name="estaVerificado">
 		 			<option value="1">si</option>

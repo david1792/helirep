@@ -24,7 +24,7 @@
 
 		function listarProductosPorBodega($id){
 			$con = conexion::getConexion();
-			$query = $con->prepare("SELECT * FROM producto INNER JOIN inventario ON inventario.id = producto.inventario_id WHERE inventario.bodega_id = :id AND producto.is_verificado = 1");
+			$query = $con->prepare("SELECT * FROM producto INNER JOIN inventario ON inventario.id = producto.inventario_id WHERE inventario.bodega_id = :id AND producto.is_verificado = 1 AND producto.cantidad > 0");
 			$query->bindParam(":id", $id, PDO::PARAM_INT);
 			$query->execute();
 			$filas = $query->fetchAll(PDO::FETCH_OBJ);
@@ -32,14 +32,15 @@
 
 		}
 
-		function actualizarProducto($id, $referencia, $descripcion, $estaVerificado, $proveedor_id_proveedor, $categoria_id_categoria, $inventario_id){
+		function actualizarProducto($id, $referencia, $descripcion, $estaVerificado, $cantidad, $proveedor_id_proveedor, $categoria_id_categoria, $inventario_id){
 			try {
 			$con = conexion::getConexion();
-			$query = $con->prepare("UPDATE Producto SET referencia = :referencia, descripcion = :descripcion, is_verificado = :estaVerificado, proveedor_id_proveedor = :proveedor_id_proveedor, categoria_id_categoria = :categoria_id_categoria, inventario_id = :inventario_id where id = :id");
+			$query = $con->prepare("UPDATE Producto SET referencia = :referencia, descripcion = :descripcion, is_verificado = :estaVerificado, cantidad = :cantidad, proveedor_id_proveedor = :proveedor_id_proveedor, categoria_id_categoria = :categoria_id_categoria, inventario_id = :inventario_id where id = :id");
 			$query->bindParam(":id", $id, PDO::PARAM_INT);
 			$query->bindParam(":referencia", $referencia, PDO::PARAM_STR);
 			$query->bindParam(":descripcion", $descripcion, PDO::PARAM_STR);
 			$query->bindParam(":estaVerificado", $estaVerificado, PDO::PARAM_INT);
+			$query->bindParam(":cantidad", $cantidad, PDO::PARAM_INT);
 			$query->bindParam(":proveedor_id_proveedor", $proveedor_id_proveedor, PDO::PARAM_STR);
 			$query->bindParam(":categoria_id_categoria", $categoria_id_categoria, PDO::PARAM_STR);
 			$query->bindParam(":inventario_id", $inventario_id, PDO::PARAM_STR);
@@ -54,13 +55,14 @@
 
 		}
 
-		function crearProducto($referencia, $descripcion, $estaVerificado, $proveedor_id_proveedor, $categoria_id_categoria, $inventario_id){
+		function crearProducto($referencia, $descripcion, $estaVerificado, $cantidad, $proveedor_id_proveedor, $categoria_id_categoria, $inventario_id){
 			try {
 			$con = conexion::getConexion();
-			$query = $con->prepare("INSERT INTO producto VALUES (null, :referencia, :descripcion, :estaVerificado, :proveedor_id_proveedor, :categoria_id_categoria, :inventario_id)");
+			$query = $con->prepare("INSERT INTO producto VALUES (null, :referencia, :descripcion, :estaVerificado, :cantidad, :proveedor_id_proveedor, :categoria_id_categoria, :inventario_id)");
 			$query->bindParam(":referencia", $referencia, PDO::PARAM_STR);
 			$query->bindParam(":descripcion", $descripcion, PDO::PARAM_STR);
 			$query->bindParam(":estaVerificado", $estaVerificado, PDO::PARAM_INT);
+			$query->bindParam(":cantidad", $cantidad, PDO::PARAM_INT);
 			$query->bindParam(":proveedor_id_proveedor", $proveedor_id_proveedor, PDO::PARAM_STR);
 			$query->bindParam(":categoria_id_categoria", $categoria_id_categoria, PDO::PARAM_STR);
 			$query->bindParam(":inventario_id", $inventario_id, PDO::PARAM_STR);

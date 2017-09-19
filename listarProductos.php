@@ -24,6 +24,7 @@
 	 				<th>referencia</th>
 	 				<th>descripcion</th>
 	 				<th>esta verificado</th>
+	 				<th>cantidad</th>
 	 				<th>proveedor</th>
 	 				<th>categoria</th>
 	 				<th>inventario</th>
@@ -37,6 +38,7 @@
 	 					<th><?php echo $producto->referencia; ?></th>
 	 					<th><?php echo $producto->descripcion; ?></th>
 	 					<th><?php echo $producto->is_verificado; ?></th>
+	 					<th><?php echo $producto->cantidad; ?></th>
 	 					<th><?php echo $producto->proveedor_id_proveedor; ?></th>
 	 					<th><?php echo $producto->categoria_id_categoria; ?></th>
 	 					<th><?php echo $producto->inventario_id; ?></th>

@@ -34,6 +34,9 @@
 		<br>
  		<label for="descripcion">descripcion</label>
  		<input id="descripcion"  type="text" name="descripcion" value="<?php echo $filas[0]->descripcion ?>">
+ 		<br>
+ 		<label for="cantidad">cantidad</label>
+ 		<input id="cantidad"  type="number" name="cantidad" value="<?php echo $filas[0]->cantidad ?>">
 		<br>
 		<label for="estaVerificado">esta verificado?</label>
 	 		<select id="estaVerificado" name="estaVerificado">
