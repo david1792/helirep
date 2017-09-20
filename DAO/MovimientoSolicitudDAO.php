@@ -62,7 +62,7 @@
 			$query->execute();
 			echo "disminuyo";
 
-			//header("location:../listarProyectos.php");
+			header("location:../listarProyectos.php");
 			} catch (PDOException $e) {
 				echo($e);
 			}
@@ -76,15 +76,19 @@
 			$query = $con->prepare("UPDATE Producto SET cantidad = (cantidad + 1) where id = :id");
 			$query->bindParam(":id", $id, PDO::PARAM_INT);
 			$query->execute();
-			echo "disminuyo";
+			echo "aumento";
 
-			//header("location:../listarProyectos.php");
+			header("location:../listarProyectos.php");
 			} catch (PDOException $e) {
 				echo($e);
 			}
 
 
-		}		 
+		}
+
+
+
+
 	}
 	
  ?>
