@@ -5,6 +5,7 @@
 	require('../DAO/MovimientoSolicitudDAO.php');
 	require('../DAO/ProductoSolicitud.php');
 	require('../util/Conexion.php');
+	
 	$solicitudDAO = new SolicitudDAO();
 	$proyectoDAO = new ProyectoDAO();
 	$movimientoSolicitudDAO = new MovimientoSolicitudDAO();
@@ -38,7 +39,8 @@
 		$descripcion = $_POST['descripcion'];
 		$solicitudId = $_POST['Solicitud_id'];
 
-		$movimientoSolicitudDAO->crearMovimiento($fechaActualizacion, $tipoMovimiento, $descripcion, $solicitudId);
+		//$movimientoSolicitudDAO->crearMovimiento($fechaActualizacion, $tipoMovimiento, $descripcion, $solicitudId);
+		$movimientoSolicitudDAO->validarMovimiento($tipoMovimiento, $fechaActualizacion, $descripcion, $solicitudId);
 
 	}if (isset($_POST['actualizarProyecto'])){
 
