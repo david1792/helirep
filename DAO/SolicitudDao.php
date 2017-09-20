@@ -11,9 +11,21 @@
 			$query->bindParam(":id", $id, PDO::PARAM_INT);
 			$query->execute();
 			$filas = $query->fetchAll(PDO::FETCH_OBJ);
+			
 			return $filas;
 
-		}	
+		}
+
+		function listarSolicitudesPorId($id){
+			$con = conexion::getConexion();
+			$query = $con->prepare("SELECT * FROM solicitud WHERE id = :id");
+			$query->bindParam(":id", $id, PDO::PARAM_INT);
+			$query->execute();
+			$filas = $query->fetchAll(PDO::FETCH_OBJ);
+			
+			return $filas;
+
+		}		
 
 		function crearSolicitud($descripcion, $fechaSolicitud, $proyecto_id){
 			try {
@@ -25,7 +37,6 @@
 
 			$query->execute();
 
-			header("location:../listarProyectos.php");
 			} catch (PDOException $e) {
 				echo($e);
 

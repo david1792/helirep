@@ -22,6 +22,7 @@
 		<br>
 		<input type="hidden" name="crearSolicitud" value="">
 		<input type="hidden" name="proyecto_id" value="<?php echo $_GET['idProyecto'] ?>">
+		<input type="hidden" name="bodega_id" value="<?php echo $_GET['bodega_id'] ?>">
 
  		<label for="descripcion">descripcion</label>
  		<input id="descripcion" type="text" name="descripcion" value="" required="">

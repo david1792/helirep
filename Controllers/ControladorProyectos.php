@@ -1,11 +1,14 @@
 <?php 
 	require('../DAO/ProyectoDAO.php');
 	require('../DAO/SolicitudDAO.php');
+	require('../DAO/ProductoDAO.php');
 	require('../DAO/MovimientoSolicitudDAO.php');
+	require('../DAO/ProductoSolicitud.php');
 	require('../util/Conexion.php');
 	$solicitudDAO = new SolicitudDAO();
 	$proyectoDAO = new ProyectoDAO();
 	$movimientoSolicitudDAO = new MovimientoSolicitudDAO();
+	$productoSolicitud = new ProductoSolicitud();
 
 	if (isset($_POST['crearProyecto'])) {
 
@@ -21,8 +24,13 @@
 		$descripcion = $_POST['descripcion'];
 		$fechaSolicitud = $_POST['fecha_solicitud'];
 		$proyecto_id = $_POST['proyecto_id'];
-
-		$solicitudDAO->crearSolicitud($descripcion, $fechaSolicitud, $proyecto_id);
+		//$solicitudDAO->crearSolicitud($descripcion, $fechaSolicitud, $proyecto_id);
+		$filaSolicitudProyecto = $solicitudDAO->listarSolicitudes($proyecto_id);
+		$proyectoIdMovimiento = $filaSolicitudProyecto[0]->proyecto_id;
+		$filaSolicitud = $solicitudDAO->listarSolicitudesPorId($proyectoIdMovimiento);
+		$idSolicitud = $filaSolicitud[0]->id;
+		$productoSolicitud->crearProductoSolicitud($idSolicitud, $proyecto_id);
+		//header("location:../listarProyectos.php");
 
 	}if (isset($_POST['crearMovimiento'])) {
 		$fechaActualizacion = $_POST['fecha_actualizacion'];
