@@ -2,6 +2,7 @@
 	/**
 	* 
 	*/
+	
 	class MovimientoInventarioDAO
 	{
 
@@ -31,8 +32,27 @@
 
 		}
 
-		function validarIdInventario(){
+		function crearMovimiento($idBodega, $tipoMovimiento){
+			try {
+				if($tipoMovimiento === 'entregado'){
+					$tipoMovimiento = 'salida';
 
+				}else{
+					$tipoMovimiento = 'entrada';
+
+				}
+
+				$con = conexion::getConexion();
+				$query = $con->prepare("INSERT INTO movimiento_inventario VALUES (null,  NOW(), :tipoMovimiento, ' ', :bodegaInventarioId)");
+				$query->bindParam(":bodegaInventarioId", $idBodega, PDO::PARAM_STR);
+				$query->bindParam(":tipoMovimiento", $tipoMovimiento, PDO::PARAM_STR);
+				$query->execute();
+
+				//header("location:../listarBodegas.php");
+			} catch (PDOException $e) {
+				echo($e);
+
+			}
 
 		}
 

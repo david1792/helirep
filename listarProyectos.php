@@ -40,7 +40,7 @@
 	 					<th><?php echo $fila->bodega_id; ?></th>
 	 					<th><a href="editarProyecto.php?idProyecto=<?php echo $fila->id ?>">editar</a>
 	 					    <a href="nuevaSolicitud.php?idProyecto=<?php echo $fila->id?>&bodega_id=<?php echo $fila->bodega_id ?>">nueva solicitud</a> 
-	 					    <a href="listarSolicitudes.php?idProyecto=<?php echo $fila->id?>">listar solicitudes</a></th>
+	 					    <a href="listarSolicitudes.php?idProyecto=<?php echo $fila->id?>&bodega_id=<?php echo $fila->bodega_id ?>">listar solicitudes</a></th>
 	 				</tr>
 	 			<?php endforeach ?>
 

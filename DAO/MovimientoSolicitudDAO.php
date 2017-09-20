@@ -2,8 +2,10 @@
 	/**
 	* 
 	*/
+	
 	class MovimientoSolicitudDAO
 	{
+		
 
 		function listarMovimientos($id){
 			$con = conexion::getConexion();
@@ -34,16 +36,18 @@
 
 		}
 
-		function validarMovimiento($tipoMovimiento, $fechaActualizacion, $descripcion, $solicitudId){
+		function validarMovimiento($tipoMovimiento, $fechaActualizacion, $descripcion, $solicitudId, $idBodega){
 			$con = conexion::getConexion();
 			$query = $con->prepare("SELECT producto.cantidad, producto.id FROM producto INNER JOIN producto_solicitud ON producto.id = producto_solicitud.producto_id_producto INNER JOIN solicitud on solicitud.id = producto_solicitud.solicitud_id_solicitud WHERE solicitud.id = :id GROUP BY cantidad");
 				$query->bindParam(":id", $solicitudId, PDO::PARAM_STR);
 				$query->execute();
-				$filas = $query->fetchAll(PDO::FETCH_OBJ);
-				
+				$filas = $query->fetchAll();
+				print_r($filas);
+				print_r($query);
 			if(($filas[0]->cantidad > 0) && $tipoMovimiento === 'entregado'){
 				$this->restarCantidadProducto($filas[0]->id);
 				$this->crearMovimiento($fechaActualizacion, $tipoMovimiento, $descripcion, $solicitudId);
+				
 				print_r($filas);
 
 			}elseif ($tipoMovimiento === 'devolucion') {
