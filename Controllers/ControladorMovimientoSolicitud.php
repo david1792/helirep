@@ -1,5 +1,5 @@
 <?php 
-		require('../util/Conexion.php');
+	require('../util/Conexion.php');
 
 	
 	

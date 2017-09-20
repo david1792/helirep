@@ -24,7 +24,7 @@
 		$descripcion = $_POST['descripcion'];
 		$fechaSolicitud = $_POST['fecha_solicitud'];
 		$proyecto_id = $_POST['proyecto_id'];
-		//$solicitudDAO->crearSolicitud($descripcion, $fechaSolicitud, $proyecto_id);
+		$solicitudDAO->crearSolicitud($descripcion, $fechaSolicitud, $proyecto_id);
 		$filaSolicitudProyecto = $solicitudDAO->listarSolicitudes($proyecto_id);
 		$proyectoIdMovimiento = $filaSolicitudProyecto[0]->proyecto_id;
 		$filaSolicitud = $solicitudDAO->listarSolicitudesPorId($proyectoIdMovimiento);
