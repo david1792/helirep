@@ -52,26 +52,27 @@
 			foreach ($filas as $f) {
 				echo $f['cantidad']."<br>";
 
-				if($f['cantidad'] > 0){
+				if($tipoMovimiento === 'entregado'){
 
-					if($tipoMovimiento === 'entregado'){
+					if($f['cantidad'] > 0 ){
 						echo "entro a entregado"."<br>";
 						$this->restarCantidadProducto($f['id']);
 						$this->crearMovimiento($fechaActualizacion, $tipoMovimiento, $descripcion, $solicitudId);
-					}
-
-					if($tipoMovimiento === 'devolucion'){
-						echo "entro a devolucion"."<br>";
-						$this->sumarCantidadProducto($f['id']);
-						$this->crearMovimiento($fechaActualizacion, $tipoMovimiento, $descripcion, $solicitudId);
+						$bandera = true;
 
 					}
-					$bandera = true;
+
+					if($f['cantidad'] <= 0){
+						echo "no existe stock para ese producto, por favor ingrese mas existencias"."<br>";
+
+					}
 					return $bandera;
 
-				}elseif ($f['cantidad'] <= 0) {
-
-					echo "no existe stock para ese producto, por favor ingrese mas existencias"."<br>";
+				}elseif ( $tipoMovimiento === 'devolucion') {
+					echo "entro a devolucion"."<br>";
+					$this->sumarCantidadProducto($f['id']);
+					$this->crearMovimiento($fechaActualizacion, $tipoMovimiento, $descripcion, $solicitudId);
+					$bandera = true;
 
 					return $bandera;
 
