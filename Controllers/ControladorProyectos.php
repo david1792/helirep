@@ -23,6 +23,7 @@
 
 		$proyectoDAO->crearProyecto($descripcion, $fechaInicio, $fechaFin, $usuario_id, $bodega_id);
 		
+
 	}if (isset($_POST['crearSolicitud'])) {
 		echo "entro solicitud<br>";
 		$descripcion = $_POST['descripcion'];
@@ -41,17 +42,27 @@
 		$productoSolicitud->crearProductoSolicitud($ultimoIdSolicitud, $productoId);
 		header("location:../listarProyectos.php");
 
+
 	}if (isset($_POST['crearMovimiento'])) {
 		$fechaActualizacion = $_POST['fecha_actualizacion'];
 		$tipoMovimiento = $_POST['tipo_movimiento'];
 		$descripcion = $_POST['descripcion'];
 		$solicitudId = $_POST['Solicitud_id'];
 		$bodega_id = $_POST['bodega_id'];
-		echo "<br>";
+		echo $fechaActualizacion."<br>";
+		echo $tipoMovimiento."<br>";
+		echo $descripcion."<br>";
+		echo $solicitudId."<br>";
+		echo $bodega_id."<br><br>";
 
-		$movimientoSolicitudDAO->validarMovimiento($tipoMovimiento, $fechaActualizacion, $descripcion, $solicitudId);
-		$movimientoInventarioDAO->crearMovimiento($bodega_id, $tipoMovimiento);
-		//header("location:../listarProyectos.php");
+		if($movimientoSolicitudDAO->validarMovimiento($tipoMovimiento, $fechaActualizacion, $descripcion, $solicitudId) == true){
+			$movimientoInventarioDAO->crearMovimiento($bodega_id, $tipoMovimiento);
+			header("location:../listarProyectos.php");
+
+		}else{
+			$mensaje = "pro favor, ingrese mas existencias de ese producto";
+			header("location:../listarProyectos.php?mensaje=$mensaje");
+		}
 
 
 	}if (isset($_POST['actualizarProyecto'])){
@@ -61,6 +72,7 @@
 		$fechaInicio = $_POST['fecha_inicio'];
 		$fechaFin = $_POST['fecha_fin'];
 		$proyectoDAO->actualizarProyecto($id, $descripcion, $fechaInicio, $fechaFin);
+
 
 	}else{
 

@@ -16,7 +16,9 @@
 	 	<title>Inicio jefe de taller</title>
 	 </head>
 	 <body>
-
+	 	<?php if (isset($_GET['mensaje'])) {
+	 		echo "<h2>".$_GET['mensaje']."<h2>";
+	 	} ?>
 	 	<table border="1" cellspacing="5" >
 	 		<thead>
 	 			

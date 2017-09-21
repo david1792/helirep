@@ -41,25 +41,39 @@
 			$query->bindParam(":id", $solicitudId, PDO::PARAM_STR);
 			$query->execute();
 			$filas = $query->fetchAll();
+
 			print_r($query);
+			echo "<br>";
+			echo "<br>";
 			print_r($filas);
 			echo "<br>";
+			echo "<br>";
+			$bandera = false;
 			foreach ($filas as $f) {
-				echo $f['cantidad'];
+				echo $f['cantidad']."<br>";
 
-				if(($f['cantidad'] > 0) && $tipoMovimiento === 'entregado'){
-					echo "entro a entregado";
-					$this->restarCantidadProducto($filas[0]->id);
-					$this->crearMovimiento($fechaActualizacion, $tipoMovimiento, $descripcion, $solicitudId);
-					
+				if($f['cantidad'] > 0){
 
-				}elseif ($tipoMovimiento === 'devolucion') {
-					echo "entro a devolucion";
-					$this->sumarCantidadProducto($filas[0]->id);
-					$this->crearMovimiento($fechaActualizacion, $tipoMovimiento, $descripcion, $solicitudId);
+					if($tipoMovimiento === 'entregado'){
+						echo "entro a entregado"."<br>";
+						$this->restarCantidadProducto($f['id']);
+						$this->crearMovimiento($fechaActualizacion, $tipoMovimiento, $descripcion, $solicitudId);
+					}
 
-				}elseif ($f == null){
-					echo "no existe stock para ese producto";
+					if($tipoMovimiento === 'devolucion'){
+						echo "entro a devolucion"."<br>";
+						$this->sumarCantidadProducto($f['id']);
+						$this->crearMovimiento($fechaActualizacion, $tipoMovimiento, $descripcion, $solicitudId);
+
+					}
+					$bandera = true;
+					return $bandera;
+
+				}elseif ($f['cantidad'] <= 0) {
+
+					echo "no existe stock para ese producto, por favor ingrese mas existencias"."<br>";
+
+					return $bandera;
 
 				}
 				
@@ -73,7 +87,7 @@
 			$query = $con->prepare("UPDATE Producto SET cantidad = (cantidad - 1) where id = :id");
 			$query->bindParam(":id", $id, PDO::PARAM_INT);
 			$query->execute();
-			echo "disminuyo";
+			echo "disminuyo"."<br>";
 
 			} catch (PDOException $e) {
 				echo($e);
@@ -88,7 +102,7 @@
 			$query = $con->prepare("UPDATE Producto SET cantidad = (cantidad + 1) where id = :id");
 			$query->bindParam(":id", $id, PDO::PARAM_INT);
 			$query->execute();
-			echo "aumento";
+			echo "aumento"."<br>";
 
 			} catch (PDOException $e) {
 				echo($e);
