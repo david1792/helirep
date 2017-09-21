@@ -5,7 +5,7 @@
 	class SolicitudDAO
 	{
 
-		function listarSolicitudes($id){
+		function listarSolicitudesPorProyecto($id){
 			$con = conexion::getConexion();
 			$query = $con->prepare("SELECT * FROM solicitud WHERE proyecto_id = :id");
 			$query->bindParam(":id", $id, PDO::PARAM_INT);
@@ -16,9 +16,9 @@
 
 		}
 
-		function listarSolicitudesPorId($id){
+		function listarUltumaSolicitudInsertada($id){
 			$con = conexion::getConexion();
-			$query = $con->prepare("SELECT * FROM solicitud WHERE id = :id");
+			$query = $con->prepare("SELECT max(id) as proyecto_id FROM solicitud WHERE proyecto_id = :id");
 			$query->bindParam(":id", $id, PDO::PARAM_INT);
 			$query->execute();
 			$filas = $query->fetchAll(PDO::FETCH_OBJ);

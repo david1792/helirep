@@ -2,7 +2,6 @@
 	/**
 	* 
 	*/
-	
 	class MovimientoSolicitudDAO
 	{
 		
@@ -19,16 +18,16 @@
 
 		function crearMovimiento($fechaActualizacion, $tipoMovimiento, $descripcion, $solicitudId){
 			try {
-			$con = conexion::getConexion();
-			$query = $con->prepare("INSERT INTO movimiento_solicitud VALUES (null, :fechaActualizacion, :tipoMovimiento, :descripcion, :solicitudId)");
-			$query->bindParam(":fechaActualizacion", $fechaActualizacion, PDO::PARAM_STR);
-			$query->bindParam(":tipoMovimiento", $tipoMovimiento, PDO::PARAM_STR);
-			$query->bindParam(":descripcion", $descripcion, PDO::PARAM_STR);
-			$query->bindParam(":solicitudId", $solicitudId, PDO::PARAM_STR);
+				echo "entro a movimiento";
+				$con = conexion::getConexion();
+				$query = $con->prepare("INSERT INTO movimiento_solicitud VALUES (null, :fechaActualizacion, :tipoMovimiento, :descripcion, :solicitudId)");
+				$query->bindParam(":fechaActualizacion", $fechaActualizacion, PDO::PARAM_STR);
+				$query->bindParam(":tipoMovimiento", $tipoMovimiento, PDO::PARAM_STR);
+				$query->bindParam(":descripcion", $descripcion, PDO::PARAM_STR);
+				$query->bindParam(":solicitudId", $solicitudId, PDO::PARAM_STR);
 
-			$query->execute();
+				$query->execute();
 
-			header("location:../listarProyectos.php");
 			} catch (PDOException $e) {
 				echo($e);
 
@@ -36,24 +35,34 @@
 
 		}
 
-		function validarMovimiento($tipoMovimiento, $fechaActualizacion, $descripcion, $solicitudId, $idBodega){
+		function validarMovimiento($tipoMovimiento, $fechaActualizacion, $descripcion, $solicitudId){
 			$con = conexion::getConexion();
 			$query = $con->prepare("SELECT producto.cantidad, producto.id FROM producto INNER JOIN producto_solicitud ON producto.id = producto_solicitud.producto_id_producto INNER JOIN solicitud on solicitud.id = producto_solicitud.solicitud_id_solicitud WHERE solicitud.id = :id GROUP BY cantidad");
-				$query->bindParam(":id", $solicitudId, PDO::PARAM_STR);
-				$query->execute();
-				$filas = $query->fetchAll();
-				print_r($filas);
-				print_r($query);
-			if(($filas[0]->cantidad > 0) && $tipoMovimiento === 'entregado'){
-				$this->restarCantidadProducto($filas[0]->id);
-				$this->crearMovimiento($fechaActualizacion, $tipoMovimiento, $descripcion, $solicitudId);
+			$query->bindParam(":id", $solicitudId, PDO::PARAM_STR);
+			$query->execute();
+			$filas = $query->fetchAll();
+			print_r($query);
+			print_r($filas);
+			echo "<br>";
+			foreach ($filas as $f) {
+				echo $f['cantidad'];
+
+				if(($f['cantidad'] > 0) && $tipoMovimiento === 'entregado'){
+					echo "entro a entregado";
+					$this->restarCantidadProducto($filas[0]->id);
+					$this->crearMovimiento($fechaActualizacion, $tipoMovimiento, $descripcion, $solicitudId);
+					
+
+				}elseif ($tipoMovimiento === 'devolucion') {
+					echo "entro a devolucion";
+					$this->sumarCantidadProducto($filas[0]->id);
+					$this->crearMovimiento($fechaActualizacion, $tipoMovimiento, $descripcion, $solicitudId);
+
+				}elseif ($f == null){
+					echo "no existe stock para ese producto";
+
+				}
 				
-				print_r($filas);
-
-			}elseif ($tipoMovimiento === 'devolucion') {
-				$this->sumarCantidadProducto($filas[0]->id);
-				$this->crearMovimiento($fechaActualizacion, $tipoMovimiento, $descripcion, $solicitudId);
-
 			}
 
 		}

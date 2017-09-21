@@ -33,12 +33,15 @@
 		}
 
 		function crearMovimiento($idBodega, $tipoMovimiento){
+			echo "entro a crearMovimiento<br>";
 			try {
 				if($tipoMovimiento === 'entregado'){
 					$tipoMovimiento = 'salida';
+					echo "salida<br>";
 
 				}else{
 					$tipoMovimiento = 'entrada';
+					echo "entrada<br>";
 
 				}
 
@@ -47,8 +50,8 @@
 				$query->bindParam(":bodegaInventarioId", $idBodega, PDO::PARAM_STR);
 				$query->bindParam(":tipoMovimiento", $tipoMovimiento, PDO::PARAM_STR);
 				$query->execute();
+				echo "salio de crearMovimiento<br>";
 
-				//header("location:../listarBodegas.php");
 			} catch (PDOException $e) {
 				echo($e);
 

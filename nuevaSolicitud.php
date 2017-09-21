@@ -32,8 +32,8 @@
 	 	<input id="fecha_solicitud"  type="text" name="fecha_solicitud" value="" required="">
 		<br>
 
- 		<label for="bodega">Bodega</label>
-	 	<select id="bodega" name="bodega" required="true">
+ 		<label for="producto">producto disponibles</label>
+	 	<select id="producto" name="producto" required="true">
 	 		<?php foreach ($filas as $fila): ?>
 	 			<option value="<?php echo $fila->id; ?>"><?php echo $fila->referencia; ?></option>
 	 		<?php endforeach ?>

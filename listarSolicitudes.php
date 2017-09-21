@@ -7,7 +7,7 @@
 		$solicitudDAO = new SolicitudDAO();
 		$id = $_GET['idProyecto'];
 		$idBodega = $_GET['bodega_id'];
-		$filas = $solicitudDAO->listarSolicitudes($id);
+		$filas = $solicitudDAO->listarSolicitudesPorProyecto($id);
 
  ?>
 

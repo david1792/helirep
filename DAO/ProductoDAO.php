@@ -24,7 +24,17 @@
 
 		function listarProductosPorBodega($id){
 			$con = conexion::getConexion();
-			$query = $con->prepare("SELECT * FROM producto INNER JOIN inventario ON inventario.id = producto.inventario_id WHERE inventario.bodega_id = :id AND producto.is_verificado = 1 AND producto.cantidad > 0");
+			$query = $con->prepare("SELECT producto.id, producto.referencia FROM producto INNER JOIN inventario ON inventario.id = producto.inventario_id WHERE inventario.bodega_id = :id AND producto.is_verificado = 1 AND producto.cantidad > 0");
+			$query->bindParam(":id", $id, PDO::PARAM_INT);
+			$query->execute();
+			$filas = $query->fetchAll(PDO::FETCH_OBJ);
+			return $filas;
+
+		}
+
+		function listarProductosPorProyecto($id){
+			$con = conexion::getConexion();
+			$query = $con->prepare("SELECT producto.id FROM proyecto INNER JOIN bodega ON bodega.id = proyecto.bodega_id INNER JOIN inventario on inventario.bodega_id = bodega.id INNER JOIN producto ON bodega.id = producto.inventario_id WHERE producto.id = :id GROUP BY producto.id");
 			$query->bindParam(":id", $id, PDO::PARAM_INT);
 			$query->execute();
 			$filas = $query->fetchAll(PDO::FETCH_OBJ);

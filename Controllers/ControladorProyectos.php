@@ -9,7 +9,9 @@
 	$solicitudDAO = new SolicitudDAO();
 	$proyectoDAO = new ProyectoDAO();
 	$movimientoSolicitudDAO = new MovimientoSolicitudDAO();
+	$movimientoInventarioDAO = new MovimientoInventarioDAO();
 	$productoSolicitud = new ProductoSolicitud();
+	$productoDAO = new  ProductoDAO();
 
 	if (isset($_POST['crearProyecto'])) {
 
@@ -22,16 +24,22 @@
 		$proyectoDAO->crearProyecto($descripcion, $fechaInicio, $fechaFin, $usuario_id, $bodega_id);
 		
 	}if (isset($_POST['crearSolicitud'])) {
+		echo "entro solicitud<br>";
 		$descripcion = $_POST['descripcion'];
 		$fechaSolicitud = $_POST['fecha_solicitud'];
 		$proyecto_id = $_POST['proyecto_id'];
+		$productoId = $_POST['producto'];
+
 		$solicitudDAO->crearSolicitud($descripcion, $fechaSolicitud, $proyecto_id);
-		$filaSolicitudProyecto = $solicitudDAO->listarSolicitudes($proyecto_id);
-		$proyectoIdMovimiento = $filaSolicitudProyecto[0]->proyecto_id;
-		$filaSolicitud = $solicitudDAO->listarSolicitudesPorId($proyectoIdMovimiento);
-		$idSolicitud = $filaSolicitud[0]->id;
-		$productoSolicitud->crearProductoSolicitud($idSolicitud, $proyecto_id);
-		//header("location:../listarProyectos.php");
+		$ultimaSolicitudInsertado = $solicitudDAO->listarUltumaSolicitudInsertada($proyecto_id);
+
+		foreach ($ultimaSolicitudInsertado as $key) {
+			$ultimoIdSolicitud = $key->proyecto_id;
+			
+		}
+
+		$productoSolicitud->crearProductoSolicitud($ultimoIdSolicitud, $productoId);
+		header("location:../listarProyectos.php");
 
 	}if (isset($_POST['crearMovimiento'])) {
 		$fechaActualizacion = $_POST['fecha_actualizacion'];
@@ -39,8 +47,12 @@
 		$descripcion = $_POST['descripcion'];
 		$solicitudId = $_POST['Solicitud_id'];
 		$bodega_id = $_POST['bodega_id'];
+		echo "<br>";
 
-		$movimientoSolicitudDAO->validarMovimiento($tipoMovimiento, $fechaActualizacion, $descripcion, $solicitudId, $bodega_id);
+		$movimientoSolicitudDAO->validarMovimiento($tipoMovimiento, $fechaActualizacion, $descripcion, $solicitudId);
+		$movimientoInventarioDAO->crearMovimiento($bodega_id, $tipoMovimiento);
+		//header("location:../listarProyectos.php");
+
 
 	}if (isset($_POST['actualizarProyecto'])){
 

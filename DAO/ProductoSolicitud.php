@@ -13,7 +13,6 @@
 			$query->bindParam(":producto_id_producto", $producto_id_producto, PDO::PARAM_STR);
 			$query->execute();
 
-			header("location:../listarProyectos.php");
 			} catch (PDOException $e) {
 				echo($e);
 
