@@ -28,7 +28,7 @@
 
 			$query->execute();
 
-			//header("location:../listarProyectos.php");
+			header("location:../listarProyectos.php");
 			} catch (PDOException $e) {
 				echo($e);
 
@@ -66,7 +66,6 @@
 			$query->execute();
 			echo "disminuyo";
 
-			header("location:../listarProyectos.php");
 			} catch (PDOException $e) {
 				echo($e);
 			}
@@ -82,7 +81,6 @@
 			$query->execute();
 			echo "aumento";
 
-			header("location:../listarProyectos.php");
 			} catch (PDOException $e) {
 				echo($e);
 			}
