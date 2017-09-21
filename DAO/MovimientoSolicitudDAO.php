@@ -35,16 +35,23 @@
 		}
 
 		function validarMovimiento($tipoMovimiento, $fechaActualizacion, $descripcion, $solicitudId){
+			echo $tipoMovimiento.'<br>';
+			echo $fechaActualizacion.'<br>';
+			echo $descripcion.'<br>';
+			echo $solicitudId.'<br>'.'<br>';
 			$con = conexion::getConexion();
 			$query = $con->prepare("SELECT producto.cantidad, producto.id FROM producto INNER JOIN producto_solicitud ON producto.id = producto_solicitud.producto_id_producto INNER JOIN solicitud on solicitud.id = producto_solicitud.solicitud_id_solicitud WHERE solicitud.id = :id GROUP BY cantidad");
-				$query->bindParam(":id", $solicitudId, PDO::PARAM_STR);
+				$query->bindParam(":id", $solicitudId, PDO::PARAM_INT);
 				$query->execute();
 				$filas = $query->fetchAll(PDO::FETCH_OBJ);
-				
+				print_r($filas);
+				echo '<br>';
+				print_r($query);
 			if(($filas[0]->cantidad > 0) && $tipoMovimiento === 'entregado'){
 				$this->restarCantidadProducto($filas[0]->id);
 				$this->crearMovimiento($fechaActualizacion, $tipoMovimiento, $descripcion, $solicitudId);
 				print_r($filas);
+
 
 			}elseif ($tipoMovimiento === 'devolucion') {
 				$this->sumarCantidadProducto($filas[0]->id);
@@ -62,7 +69,6 @@
 			$query->execute();
 			echo "disminuyo";
 
-			header("location:../listarProyectos.php");
 			} catch (PDOException $e) {
 				echo($e);
 			}
@@ -78,7 +84,6 @@
 			$query->execute();
 			echo "aumento";
 
-			header("location:../listarProyectos.php");
 			} catch (PDOException $e) {
 				echo($e);
 			}

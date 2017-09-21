@@ -38,8 +38,8 @@
 		$tipoMovimiento = $_POST['tipo_movimiento'];
 		$descripcion = $_POST['descripcion'];
 		$solicitudId = $_POST['Solicitud_id'];
+		echo $tipoMovimiento;
 
-		//$movimientoSolicitudDAO->crearMovimiento($fechaActualizacion, $tipoMovimiento, $descripcion, $solicitudId);
 		$movimientoSolicitudDAO->validarMovimiento($tipoMovimiento, $fechaActualizacion, $descripcion, $solicitudId);
 
 	}if (isset($_POST['actualizarProyecto'])){
