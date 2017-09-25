@@ -34,7 +34,8 @@
 	 					<th><?php echo $fila->id; ?></th>
 	 					<th><?php echo $fila->descripcion; ?></th>
 	 					<th><?php echo $fila->fecha_solicitud; ?></th>
-	 					<th><a href="crearMovimiento.php?idSolicitud=<?php echo $fila->id ?>&idBodega=<?php echo $idBodega; ?>">nuevo movimiento</a> <a href="listarMovimientos.php?idSolicitud=<?php echo $fila->id ?>">listar movimiento</a></th>
+	 					<th><a href="crearMovimiento.php?idSolicitud=<?php echo $fila->id ?>&idBodega=<?php echo $idBodega; ?>&descripcion=<?php echo $fila->descripcion ?>">nuevo movimiento</a> 
+	 						<a href="listarMovimientos.php?idSolicitud=<?php echo $fila->id ?>">listar movimiento</a></th>
 	 				</tr>
 	 			<?php endforeach ?>
 

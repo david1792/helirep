@@ -46,15 +46,13 @@
  	<script type="text/javascript">
  		  $( function() {
 		    $("#fecha_inicio").datepicker({
-		     dateFormat: 'yy-mm-dd',
-		     minDate: 0
+		     dateFormat: 'yy-mm-dd'
 		      });
 		  });
 
  		  $( function() {
 		    $("#fecha_fin").datepicker({
-		     dateFormat: 'yy-mm-dd',
-		     minDate: 0
+		     dateFormat: 'yy-mm-dd'
 		      });
 		  });
 

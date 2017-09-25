@@ -3,6 +3,7 @@
 	if(isset($_SESSION['rol']) || $_SESSION['rol'] === 1){
 		$Solicitud_id = $_GET['idSolicitud'];
 		$bodega_id = $_GET['idBodega'];
+		$descripcionMovimiento = $_GET['descripcion'];
  ?>
 
  <!DOCTYPE html>
@@ -15,7 +16,8 @@
  	<form action="Controllers/ControladorProyectos.php" method="post">
 		<input type="hidden" name="crearMovimiento" value="">
 		<input type="hidden" name="Solicitud_id" value="<?php echo $_GET['idSolicitud']; ?>">
-		<input type="hidden" name="bodega_id" value="<?php echo $_GET['idBodega'];; ?>">
+		<input type="hidden" name="bodega_id" value="<?php echo $_GET['idBodega']; ?>">
+		<input type="hidden" name="descripcionMovimiento" value="<?php echo $_GET['descripcion']; ?>">
 		<br>
 
 	 	<label for="fecha_actualizacion">fecha_actualizacion</label>
@@ -39,9 +41,7 @@
  	<script type="text/javascript">
  		  $( function() {
 		    $("#fecha_actualizacion").datepicker({
-		     dateFormat: 'yy-mm-dd',
-		     minDate: 0,
-		     maxDate: 'today',
+		     dateFormat: 'yy-mm-dd'
 
 		      });
 		  });

@@ -45,9 +45,8 @@
  	<script type="text/javascript">
  		  $( function() {
 		    $("#fecha_solicitud").datepicker({
-		     dateFormat: 'yy-mm-dd',
-		     minDate: 0,
-		     maxDate: 'today',
+		     dateFormat: 'yy-mm-dd'
+		     
 		      });
 		  });
 

@@ -4,7 +4,6 @@
 	*/
 	class MovimientoSolicitudDAO
 	{
-		
 
 		function listarMovimientos($id){
 			$con = conexion::getConexion();
@@ -14,6 +13,29 @@
 			$filas = $query->fetchAll(PDO::FETCH_OBJ);
 			return $filas;
 
+		}
+
+		function movimientosProductosAsignadosAPedidos($idSolicitud){
+			$con = conexion::getConexion();
+			$query = $con->prepare("SELECT movimiento_solicitud.tipo_movimiento, solicitud.descripcion, producto.referencia from movimiento_solicitud inner join solicitud on solicitud.id = movimiento_solicitud.solicitud_id inner join producto_solicitud on solicitud.id = producto_solicitud.solicitud_id_solicitud inner join producto on producto.id = producto_solicitud.producto_id_producto where solicitud.id = :idSolicitud");
+			$query->bindParam(":idSolicitud", $idSolicitud, PDO::PARAM_INT);
+			$query->execute();
+			$filas = $query->fetchAll(PDO::FETCH_OBJ);
+			return $filas;
+
+		}		
+
+		function  movimientosConsolidadosEntreInventarioYPedidos ($idSolicitud, $idProducto, $fechaMovimientoDesde, $fechaMovimientoHasta){
+			$con = conexion::getConexion();
+			$query = $con->prepare("SELECT movimiento_solicitud.tipo_movimiento, solicitud.descripcion, producto.referencia from movimiento_solicitud inner join solicitud on solicitud.id = movimiento_solicitud.solicitud_id inner join producto_solicitud on solicitud.id = producto_solicitud.solicitud_id_solicitud inner join producto on producto.id = producto_solicitud.producto_id_producto where fecha_actualizacion between :fechaMovimientoDesde and :fechaMovimientoHasta and producto.id = :idProducto and solicitud.id = :idSolicitud");
+
+			$query->bindParam(":fechaMovimientoDesde", $fechaMovimientoDesde, PDO::PARAM_STR);
+			$query->bindParam(":fechaMovimientoHasta", $fechaMovimientoHasta, PDO::PARAM_STR);
+			$query->bindParam(":idProducto", $idProducto, PDO::PARAM_INT);
+			$query->bindParam(":idSolicitud", $idSolicitud, PDO::PARAM_INT);
+			$query->execute();
+			$filas = $query->fetchAll(PDO::FETCH_OBJ);
+			return $filas;
 		}
 
 		function crearMovimiento($fechaActualizacion, $tipoMovimiento, $descripcion, $solicitudId){
@@ -34,6 +56,8 @@
 			}
 
 		}
+
+
 
 		function validarMovimiento($tipoMovimiento, $fechaActualizacion, $descripcion, $solicitudId){
 			$con = conexion::getConexion();

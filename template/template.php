@@ -38,6 +38,7 @@
         <a href="listarProveedores.php" class="button">Listar proveedores</a>
         <a href="listarCategorias.php" class="button">Listar categorias</a>
         <a href="listarProyectos.php" class="button">Listar proyectos</a>
+        <a href="reportes.php" class="button">Reportes</a>
         <br><br><br>
     </body>
     <footer>

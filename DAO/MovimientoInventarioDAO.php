@@ -32,7 +32,7 @@
 
 		}
 
-		function crearMovimiento($idBodega, $tipoMovimiento){
+		function crearMovimiento($idBodega, $tipoMovimiento, $descripcion){
 			echo "entro a crearMovimiento<br>";
 			try {
 				if($tipoMovimiento === 'entregado'){
@@ -46,9 +46,10 @@
 				}
 
 				$con = conexion::getConexion();
-				$query = $con->prepare("INSERT INTO movimiento_inventario VALUES (null,  NOW(), :tipoMovimiento, ' ', :bodegaInventarioId)");
+				$query = $con->prepare("INSERT INTO movimiento_inventario VALUES (null,  NOW(), :tipoMovimiento, :descripcion, :bodegaInventarioId)");
 				$query->bindParam(":bodegaInventarioId", $idBodega, PDO::PARAM_STR);
 				$query->bindParam(":tipoMovimiento", $tipoMovimiento, PDO::PARAM_STR);
+				$query->bindParam(":descripcion", $descripcion, PDO::PARAM_STR);
 				$query->execute();
 				echo "salio de crearMovimiento<br>";
 
