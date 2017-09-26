@@ -1,8 +1,13 @@
-select movimiento_inventario.tipo_movimiento, bodega.nombre, producto.referencia
+select movimiento_inventario.tipo_movimiento, 
+bodega.nombre, 
+producto.referencia
 from movimiento_inventario inner join inventario on inventario.id = movimiento_inventario.inventario_id 
 inner join bodega on inventario.bodega_id = bodega.id
 inner join producto on producto.inventario_id = inventario.id
-where fecha_actualizacion between '2017-01-01' and '2017-12-08' and producto.id = 1;
+where fecha_actualizacion between '2017-01-01' and '2017-12-08' and producto.id = 2
+group by movimiento_inventario.tipo_movimiento, 
+bodega.nombre, 
+producto.referencia;
 
 select bodega.nombre, inventario.id, movimiento_inventario.tipo_movimiento, producto.referencia
 from bodega inner join inventario on inventario.bodega_id = bodega.id 
@@ -12,7 +17,11 @@ inner join producto on producto.inventario_id = inventario.id;
 select   inventario.id, movimiento_inventario.tipo_movimiento, producto.referencia
 from bodega inner join inventario on inventario.bodega_id = bodega.id 
 inner join movimiento_inventario on movimiento_inventario.inventario_id = inventario.id
-inner join producto on producto.inventario_id = inventario.id order by referencia;
+inner join producto on producto.inventario_id = inventario.id where producto.id = 3 order by referencia ;
+
+select inventario.id, movimiento_inventario.tipo_movimiento 
+from inventario inner join movimiento_inventario on inventario.id = movimiento_inventario.inventario_id
+ where mov_producto = 3;  
 
 ------------------------------------------------;
 
@@ -34,3 +43,4 @@ inner join producto on producto.id = producto_solicitud.producto_id_producto
 
 
 
+select * from movimiento_inventario;

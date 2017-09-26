@@ -77,7 +77,7 @@
 	 	</select>
  		<label for="solicitud">seleccione la solicitud</label>
 	 	<br>
-	 	 		<br>
+	 	 <br>
 	 	<select id="producto" name="producto" required="true">
 	 		<?php foreach ($listarProductos as $fila): ?>
 	 			<option value="<?php echo $fila->id; ?>"><?php echo $fila->referencia; ?></option>

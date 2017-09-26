@@ -2,12 +2,15 @@
 	
 	class InventarioDAO{
 
-		function listarMovimientosDeEntradaYSalida($productoReporte1, $fechaInventarioDesde, $fechaInventarioHasta){
+		function listarMovimientosDeEntradaYSalida($productoReporte1, $fechaInventarioDesde, $fechaInventarioHasta, $tipo_producto){
 			$con = conexion::getConexion();
-			$query = $con->prepare("SELECT movimiento_inventario.tipo_movimiento, bodega.nombre, producto.referencia from movimiento_inventario inner join inventario on inventario.id = movimiento_inventario.inventario_id inner join bodega on inventario.bodega_id = bodega.id inner join producto on producto.inventario_id = inventario.id where fecha_actualizacion between :fechaInventarioDesde and :fechaInventarioHasta and producto.id = :id");
+			$query = $con->prepare("SELECT inventario.id, movimiento_inventario.tipo_movimiento 
+from inventario inner join movimiento_inventario on inventario.id = movimiento_inventario.inventario_id
+where fecha_actualizacion between :fechaInventarioDesde and :fechaInventarioHasta and movimiento_inventario.mov_producto = :tipo_producto");
+
 			$query->bindParam(":fechaInventarioDesde", $fechaInventarioDesde, PDO::PARAM_STR);
 			$query->bindParam(":fechaInventarioHasta", $fechaInventarioHasta, PDO::PARAM_STR);
-			$query->bindParam(":id", $productoReporte1, PDO::PARAM_INT);
+			$query->bindParam(":tipo_producto", $tipo_producto, PDO::PARAM_INT);
 			$query->execute();
 			$filas = $query->fetchAll(PDO::FETCH_OBJ);
 			return $filas;

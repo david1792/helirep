@@ -50,6 +50,8 @@
 		$descripcionMovimiento = $_POST['descripcionMovimiento'];
 		$solicitudId = $_POST['Solicitud_id'];
 		$bodega_id = $_POST['bodega_id'];
+		$tipo_producto = $_POST['tipo_producto'];
+
 		echo $fechaActualizacion."<br>";
 		echo $tipoMovimiento."<br>";
 		echo $descripcion."<br>";
@@ -59,7 +61,7 @@
 
 
 		if($movimientoSolicitudDAO->validarMovimiento($tipoMovimiento, $fechaActualizacion, $descripcion, $solicitudId) == true){
-			$movimientoInventarioDAO->crearMovimiento($bodega_id, $tipoMovimiento, $descripcionMovimiento);
+			$movimientoInventarioDAO->crearMovimiento($bodega_id, $tipoMovimiento, $descripcionMovimiento, $tipo_producto);
 			header("location:../listarProyectos.php");
 
 		}else{

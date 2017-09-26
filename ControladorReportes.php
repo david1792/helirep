@@ -14,7 +14,9 @@
 		$productoReporte1 = $_POST['producto'];
 		$fechaInventarioDesde = $_POST['fechaInventarioDesde'];
 		$fechaInventarioHasta = $_POST['fechaInventarioHasta'];
-		$filas = $inventarioDAO->listarMovimientosDeEntradaYSalida($productoReporte1, $fechaInventarioDesde, $fechaInventarioHasta);
+		$producto = $_POST['producto'];
+
+		$filas = $inventarioDAO->listarMovimientosDeEntradaYSalida($productoReporte1, $fechaInventarioDesde, $fechaInventarioHasta, $producto);
 
 		?>
 
@@ -30,16 +32,14 @@
 			<div style="background-color: #fff; width: 70%;background-color: #D1C4E9">
 			<table id="table" border="1" cellspacing="1" cellpadding="1">
 				<thead>
+					<td>id</td>
 					<td>tipo movimiento</td>
-					<td>nombre</td>
-					<td>referencia</td>
 				</thead>
 				<tbody>
 					<?php foreach ($filas as $fila): ?>
 						<tr>
+							<td><?php echo $fila->id ?></td>
 							<td><?php echo $fila->tipo_movimiento ?></td>
-							<td><?php echo $fila->nombre ?></td>
-							<td><?php echo $fila->referencia ?></td>
 						</tr>
 					<?php endforeach ?>
 				</tbody>
